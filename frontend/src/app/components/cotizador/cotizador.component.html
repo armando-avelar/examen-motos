@@ -1,0 +1,117 @@
+<div class="mt-4">
+    <h3 class="text-center">Cotiza tu moto</h3>
+
+    <form [formGroup]="forma" (ngSubmit)="cotizar()">
+        <div class="mt-5">
+            <h4>Datos Personales</h4>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" class="form-control form-control-sm" name="nombre" formControlName="nombre">
+                </div>
+                <div class="col-md-4">
+                    <label for="telefono">Telefono</label>
+                    <input type="text" class="form-control form-control-sm" name="telefono" formControlName="telefono">
+                </div>
+                <div class="col-md-4">
+                    <label for="correo">Correo</label>
+                    <input type="text" class="form-control form-control-sm" name="correo" formControlName="email">
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h4>Selecciona una moto</h4>
+            <hr>
+            <div class="row align-items-end">
+                <div class="col-md-4">
+                    <label for="moto">Selecciona un opción</label>
+                    <select name="" id="" name="moto" class="form-control form-control-sm" formControlName="moto">
+                        <option value="">-- Selecciona --</option>
+                        <option value="1">DEPORTIVA - RT200</option>
+                        <option value="2">CHOPPER - RC150</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-sm" [disabled]="forma.invalid">Cotizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="mt-5 text-center" *ngIf="carga">
+        <span class="h4">Cargando...</span>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="isComplete">
+        <div class="mt-5 text-left">
+            <div class="card shadow " style="width: 800px;">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Modelo</div>
+                            <div class="col-md-6">{{motoData.modelo}}</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Versión</div>
+                            <div class="col-md-6">{{motoData.version}}</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Fecha Cotización</div>
+                            <div class="col-md-6">{{motoData.fecha | date:'mediumDate'}}</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Precio</div>
+                            <div class="col-md-6">MXN ${{motoData.precio}} + iva(1.16)</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Costo Total</div>
+                            <div class="col-md-6 border-left">MXN ${{motoData.precio * 1.16}}</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Gastos Administrativos</div>
+                            <div class="col-md-6">MXN ${{motoData.adicional[0].gastosAdministrativos}}</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Accesorios</div>
+                            <div class="col-md-6">MXN ${{motoData.adicional[0].costosAccesorios}}</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Seguro</div>
+                            <div class="col-md-6">MXN ${{motoData.seguro.montoMinimo}}</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Monto de enganche</div>
+                            <div class="col-md-6">MXN ${{motoData.enganche}} = 10%</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row ">
+                            <div class="col-md-6 fw-bold">Credito</div>
+                            <div class="col-md-6">24 a 60 meses MXN ${{motoData.credito}}</div>
+                        </div>
+                    </div>
+                </div>
+                
+               
+
+            </div>
+        </div>
+    </div>
+</div>
